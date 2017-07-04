@@ -1,0 +1,11 @@
+<div class="card card-block w-75 center-block mx-auto mt-4">
+    <div *ngIf='graphData'>
+        <h3>How much you bought</h3>
+        
+        <h5><span *ngFor="let g of graphData" 
+            innerHtml="<span class='flag flag-{{g.abreviation}}'></span> {{renderHex(g.hex)}} {{g.amount}}"
+            class='badge badge-pill badge-info m-2 p-2'
+            ></span>
+        </h5>
+    </div>
+</div>

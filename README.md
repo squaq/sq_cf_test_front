@@ -1,1 +1,1 @@
-# sq_cf_test_front
+//https://restcountries.eu/data/{rate}.svg

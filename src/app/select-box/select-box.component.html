@@ -1,0 +1,61 @@
+
+<div class="card card-block w-75 center-block mx-auto">
+    <div class="row align-items-top" *ngIf="main">
+        <div class="col-7">
+            <div class="form-group" (click)="focusOn()">
+                <label for="">You send</label>
+                <input type="text" class="form-control " [value]="inModel" (input)="inModel = $event.target.value" [hidden]="!hiddenFocus" (focusout)="focusOut()">
+                <p innerHtml="{{renderHex(main.hex)}} {{inModel}}" [hidden]="hiddenFocus"></p>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group pull-right">
+                <div ngbDropdown class="d-inline-block float-right" *ngIf="ops">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        <span class='flag flag-{{main.abreviation}}'></span> {{main.currency}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownBasic1">
+
+                    <button class="dropdown-item" *ngFor="let op of ops" (click)="requestCurrency(op.currency)">
+                        <span class='flag flag-{{op.abreviation}}'></span> {{op.currency}}
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12">
+            <hr>
+            <p class="text-right text-muted" innerHtml="{{main.currency}} 1 = {{secSelec.currency}} {{secSelec.rate * 1}}"
+                style="font-size:12px"
+            ></p>
+            <hr>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-7" *ngIf="secSelec">
+            <div class="form-group">
+                <label for="">Recipient gets</label>
+                <p innerHtml="{{renderHex(secSelec.hex)}} {{inModel * secSelec.rate}}" [hidden]="false"></p>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <div ngbDropdown class="d-inline-block float-right" *ngIf="secSelec">
+                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        <span class='flag flag-{{secSelec.abreviation}}'></span> {{secSelec.currency}}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownBasic1">
+                    <button class="dropdown-item" *ngFor="let op of ops" (click)="clickSecSelect(op)">
+                        <span class='flag flag-{{op.abreviation}}'></span> {{op.currency}}
+                    </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <hr>
+        <button class="btn btn-success w-100" (click)="submitData()">Submit</button>
+    </div>
+
+</div>
